@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { Login, TodoApp } from "./pages";
+import "./App.css";
+import { createContext, useContext, useState } from "react";
+
+export const UserContext = createContext(null);
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      <div className="App">{isAuthenticated ? <TodoApp /> : <Login />}
+      
+      </div>
+    </UserContext.Provider>
   );
 }
 
